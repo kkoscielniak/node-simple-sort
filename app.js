@@ -33,7 +33,7 @@ stream
     });
 
 // Sorting numbers
-var numbers = random.randomNumbers(10001, 0, 99999);
+var numbers = random.randomNumbers(10000, 0, 99999);
 
 console.log('\nSorting numbers...');
 

@@ -1,6 +1,11 @@
 var exports = module.exports = {}
 
-
+Array.prototype.swap = function (x,y) {
+    var b = this[x];
+    this[x] = this[y];
+    this[y] = b;
+    return this;
+}
 
 
 
@@ -14,11 +19,11 @@ var compare = function(a, b) {
     }
 }
 
-var swap = function(a, b) {
-    var tmp = a; 
-    a = b; 
-    b = a;
-}
+// var swap = function(a, b) {
+//     var tmp = a; 
+//     a = b; 
+//     b = tmp;
+// }
 
 
 
@@ -214,10 +219,10 @@ var quickSort = function (arr, l, r) {
         for (var i = l + 1; i < r; i++) {
             if (compare(arr[i], t)) {
                 s++;
-                swap(arr[s], arr[i]);
+                arr.swap(s, i);
             }
         }
-        swap(arr[l], arr[i]);
+        arr.swap(l, i);
 
         quickSort(arr, l, s);
         quickSort(arr, s+1, r);
@@ -244,10 +249,10 @@ var quickSort2 = function (arr, l, r) {
         for (var i = l + 1; i < r; i++) {
             if (compare(arr[i], t)) {
                 s++;
-                swap(arr[s], arr[i]);
+                arr.swap(s, i);
             }
         }
-        swap(arr[l], arr[i]);
+        arr.swap(l, i);
 
         quickSort(arr, l, s);
         quickSort(arr, s+1, r);
@@ -275,10 +280,10 @@ var quickSort3 = function (arr, l, r) {
         for (var i = l + 1; i < r; i++) {
             if (compare(arr[i], t)) {
                 s++;
-                swap(arr[s], arr[i]);
+                arr.swap(s, i);
             }
         }
-        swap(arr[l], arr[s]);
+        arr.swap(l, s);
 
         quickSort(arr, l, s);
         quickSort(arr, s+1, r);
@@ -320,7 +325,7 @@ var insertionSortForQS = function (arr) {
         }
 
         for (j = i - 1; j >= l; j--) {
-            arraj[l] = tmp;
+            arr[l] = tmp;
         }
     }
 };
@@ -333,10 +338,10 @@ var quicksertion = function (arr, l, r) {
             for (var i = l + 1; i < r; i++) {
                 if (arr[i] < t) {
                     s++;
-                    swap(arr[s], arr[i]);
+                    arr.swap(s, i);
                 }
             }
-            swap(arr[l], arr[r]);
+            arr.swap(l, r);
 
             quicksertion(arr, l, s);
             quicksertion(arr, s + 1, r);
