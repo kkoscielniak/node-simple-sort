@@ -36,6 +36,10 @@ exports.bubbleSort = function(arr) {
 	console.timeEnd('bubbleSort');
 };
 
+
+
+
+
 exports.bubbleSort2 = function(arr) {
 	var A = arr,
 		n = arr.length,
@@ -60,6 +64,10 @@ exports.bubbleSort2 = function(arr) {
 	console.timeEnd('bubbleSort2');
 };
 
+
+
+
+
 exports.bubbleSort3 = function(arr) {	
 	var A = arr,
 		n = arr.length,
@@ -79,6 +87,10 @@ exports.bubbleSort3 = function(arr) {
 	}
 	console.timeEnd('bubbleSort3');
 };
+
+
+
+
 
 exports.selectionSort = function(arr) {
 	var k, // index of minimal element in arr
@@ -102,6 +114,10 @@ exports.selectionSort = function(arr) {
 	console.timeEnd('selectionSort');
 };
 
+
+
+
+
 exports.insertionSort = function(arr) {
 	var x, j;
 
@@ -117,6 +133,10 @@ exports.insertionSort = function(arr) {
 	}
 	console.timeEnd('insertionSort');
 };
+
+
+
+
 
 exports.shellSort = function(arr) {
 
@@ -140,6 +160,10 @@ exports.shellSort = function(arr) {
 	}
 	console.timeEnd('shellSort with h=n/2');
 }
+
+
+
+
 
 exports.shellSort2 = function(arr) {
 
@@ -171,6 +195,10 @@ exports.shellSort2 = function(arr) {
 	console.timeEnd('shellSort with h=1');
 }
 
+
+
+
+
 var quickSort = function(arr, l, r) {
 	
 	if (l < r) {
@@ -197,6 +225,37 @@ var quickSortTiming = function(arr, l, r) {
 	console.timeEnd('Quick Sort');
 }
 exports.quickSort = quickSortTiming;
+
+
+
+
+
+var quickSort2 = function(arr, l, r) {
+	
+	if (l < r) {
+		var t = arr[r/2],	// pivot
+			s = l;	// dividing element
+
+		for (var i = l + 1; i < r; i++) {
+			if (compare(arr[i], t)) {
+				s++;
+				swap(arr[s], arr[i]);
+			}
+		}
+		swap(arr[l], arr[i]);
+
+		quickSort(arr, l, s);
+		quickSort(arr, s+1, r);
+	}
+	
+}
+var quickSort2Timing = function(arr, l, r) {
+	
+	console.time('Quick Sort 2');
+	quickSort2(arr, l, r);
+	console.timeEnd('Quick Sort 2');
+}
+exports.quickSort2 = quickSort2Timing;
 
 // @todo
 // - quicksort 3 rodzaje 

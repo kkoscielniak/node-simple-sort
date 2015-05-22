@@ -27,6 +27,7 @@ stream
         sort.shellSort(clone(strings));
         sort.shellSort2(clone(strings));
         sort.quickSort(clone(strings), 0, strings.length-1);
+        sort.quickSort2(clone(strings), 0, strings.length-1);
     });
 
 // Sorting numbers
@@ -42,3 +43,4 @@ sort.insertionSort(clone(numbers));
 sort.shellSort(clone(numbers));
 sort.shellSort2(clone(numbers));
 sort.quickSort(clone(numbers), 0, numbers.length-1);
+sort.quickSort2(clone(numbers), 0, numbers.length-1);
