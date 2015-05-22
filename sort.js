@@ -11,6 +11,12 @@ var compare = function(a, b) {
 	}
 }
 
+var swap = function(a, b) {
+	var tmp = a; 
+	a = b; 
+	b = a;
+}
+
 // Standard version of bubble sort
 exports.bubbleSort = function(arr) {
 	
@@ -112,7 +118,86 @@ exports.insertionSort = function(arr) {
 	console.timeEnd('insertionSort');
 };
 
+exports.shellSort = function(arr) {
+
+	console.time('shellSort with h=n/2');
+	var h = arr.length/2;
+	
+	while (h > 0) {
+		for (var i = h; i < arr.length; i++) {
+			var x = arr[i],
+				j = i;
+
+			while((j >= h) && (x < arr[j-h])) {
+				arr[i] = arr[j-h];
+				j -= h;
+			}
+
+			arr[i] = x;
+		}
+
+		h /= 2;
+	}
+	console.timeEnd('shellSort with h=n/2');
+}
+
+exports.shellSort2 = function(arr) {
+
+	console.time('shellSort with h=1');
+
+	var h = 1,
+		tmp = arr.length/9.0;
+
+	while(h < tmp) {
+		h = 3 * h + 1;
+	}
+
+	while (h > 0) {
+		for (var i = h; i < arr.length; i++) {
+			var x = arr[i],
+				j = i;
+
+			while((j >= h) && (x < arr[j-h])) {
+				arr[i] = arr[j-h];
+				j -= h;
+			}
+
+			arr[i] = x;
+		}
+
+		h /= 3;
+	}
+
+	console.timeEnd('shellSort with h=1');
+}
+
+var quickSort = function(arr, l, r) {
+	
+	if (l < r) {
+		var t = arr[l],	// pivot
+			s = l;	// dividing element
+
+		for (var i = l + 1; i < r; i++) {
+			if (compare(arr[i], t)) {
+				s++;
+				swap(arr[s], arr[i]);
+			}
+		}
+		swap(arr[l], arr[i]);
+
+		quickSort(arr, l, s);
+		quickSort(arr, s+1, r);
+	}
+	
+}
+var quickSortTiming = function(arr, l, r) {
+	
+	console.time('Quick Sort');
+	quickSort(arr, l, r);
+	console.timeEnd('Quick Sort');
+}
+exports.quickSort = quickSortTiming;
+
 // @todo
 // - quicksort 3 rodzaje 
 // - quicksort + insertion sort
-// - shellsort dla dwóch metod wyznaczania h
