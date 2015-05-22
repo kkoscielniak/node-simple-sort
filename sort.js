@@ -1,6 +1,9 @@
 var exports = module.exports = {}
 
 
+
+
+
 // returns true if a > b for both strings and numbers
 var compare = function(a, b) {
 	if (typeof a === 'string') {
@@ -16,6 +19,10 @@ var swap = function(a, b) {
 	a = b; 
 	b = a;
 }
+
+
+
+
 
 // Standard version of bubble sort
 exports.bubbleSort = function(arr) {
@@ -68,7 +75,7 @@ exports.bubbleSort2 = function(arr) {
 
 
 
-exports.bubbleSort3 = function(arr) {	
+exports.bubbleSort3 = function (arr) {	
 	var A = arr,
 		n = arr.length,
 		swapped = false;
@@ -92,7 +99,7 @@ exports.bubbleSort3 = function(arr) {
 
 
 
-exports.selectionSort = function(arr) {
+exports.selectionSort = function (arr) {
 	var k, // index of minimal element in arr
 		x; // minimal element value
 		
@@ -118,7 +125,7 @@ exports.selectionSort = function(arr) {
 
 
 
-exports.insertionSort = function(arr) {
+exports.insertionSort = function (arr) {
 	var x, j;
 
 	console.time('insertionSort');
@@ -138,7 +145,7 @@ exports.insertionSort = function(arr) {
 
 
 
-exports.shellSort = function(arr) {
+exports.shellSort = function (arr) {
 
 	console.time('shellSort with h=n/2');
 	var h = arr.length/2;
@@ -159,13 +166,13 @@ exports.shellSort = function(arr) {
 		h /= 2;
 	}
 	console.timeEnd('shellSort with h=n/2');
-}
+};
 
 
 
 
 
-exports.shellSort2 = function(arr) {
+exports.shellSort2 = function (arr) {
 
 	console.time('shellSort with h=1');
 
@@ -191,15 +198,14 @@ exports.shellSort2 = function(arr) {
 
 		h /= 3;
 	}
-
 	console.timeEnd('shellSort with h=1');
-}
+};
 
 
 
 
 
-var quickSort = function(arr, l, r) {
+var quickSort = function (arr, l, r) {
 	
 	if (l < r) {
 		var t = arr[l],	// pivot
@@ -216,21 +222,20 @@ var quickSort = function(arr, l, r) {
 		quickSort(arr, l, s);
 		quickSort(arr, s+1, r);
 	}
-	
-}
-var quickSortTiming = function(arr, l, r) {
+};
+var quickSortTiming = function (arr, l, r) {
 	
 	console.time('Quick Sort');
 	quickSort(arr, l, r);
 	console.timeEnd('Quick Sort');
-}
+};
 exports.quickSort = quickSortTiming;
 
 
 
 
 
-var quickSort2 = function(arr, l, r) {
+var quickSort2 = function (arr, l, r) {
 	
 	if (l < r) {
 		var t = arr[r/2],	// pivot
@@ -248,15 +253,103 @@ var quickSort2 = function(arr, l, r) {
 		quickSort(arr, s+1, r);
 	}
 	
-}
-var quickSort2Timing = function(arr, l, r) {
+};
+var quickSort2Timing = function (arr, l, r) {
 	
 	console.time('Quick Sort 2');
 	quickSort2(arr, l, r);
 	console.timeEnd('Quick Sort 2');
-}
+};
 exports.quickSort2 = quickSort2Timing;
 
-// @todo
-// - quicksort 3 rodzaje 
-// - quicksort + insertion sort
+
+
+
+
+var quickSort3 = function (arr, l, r) {
+	
+	if (l < r) {
+		var t = Math.max(Math.min(arr[l], arr[r/2]),(Math.min(Math.max(arr[l], arr[r/2])), arr[r])),	// pivot
+			s = l;	// dividing element
+
+		for (var i = l + 1; i < r; i++) {
+			if (compare(arr[i], t)) {
+				s++;
+				swap(arr[s], arr[i]);
+			}
+		}
+		swap(arr[l], arr[s]);
+
+		quickSort(arr, l, s);
+		quickSort(arr, s+1, r);
+	}
+};
+var quickSort3Timing = function (arr, l, r) {
+	
+	console.time('Quick Sort 3');
+	quickSort3(arr, l, r);
+	console.timeEnd('Quick Sort 3');
+};
+exports.quickSort3 = quickSort3Timing;
+
+
+
+
+
+var insertionSortForQS = function (arr) {
+	var j = 0,
+		l = 0,
+		p = 0,
+		m = 0,
+		tmp;
+
+	for (var i = 0; i < arr.length; i++) {
+		tmp = arr[i];
+		l = 0;
+		p = i-1;
+
+		while (l <= p) {
+			m = (l + p) / 2;
+
+			if (tmp < arr[m]) {
+				p = m - 1;
+			} 
+			else {
+				l = m + 1;
+			}
+		}
+
+		for (j = i - 1; j >= l; j--) {
+			arraj[l] = tmp;
+		}
+	}
+};
+var quicksertion = function (arr, l, r) {
+	if (arr.length > 20) {
+		if (l < r) {
+			var t = arr[l],	// pivot element
+				s = l;
+
+			for (var i = l + 1; i < r; i++) {
+				if (arr[i] < t) {
+					s++;
+					swap(arr[s], arr[i]);
+				}
+			}
+			swap(arr[l], arr[r]);
+
+			quicksertion(arr, l, s);
+			quicksertion(arr, s + 1, r);
+		}
+	} 
+	else {
+		insertionSortForQS(arr);
+	}
+};
+var quicksertionTiming = function (arr, l, r) {
+	
+	console.time('Quick Sort with Insertion Sort');
+	quicksertion(arr, l, r);
+	console.timeEnd('Quick Sort with Insertion Sort');
+};
+exports.quicksertion = quicksertionTiming;
