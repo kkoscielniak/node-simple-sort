@@ -1,17 +1,16 @@
 var fs = require('fs'),
-    byline = require('byline');
+    byline = require('byline'),
+    clone = require('clone');
 
 var sort = require('./sort.js');
-// var data = require('./dataset.js');
+var random = require('./lib/random');
 
-console.log('\033[2J'); // clear screen
-
-// var numbers = [9, 8, 10, 11, 5, 6, 100, 55, 2];
-
-var strings = [];
+console.log('\033[2J'); // clear screen each time app is running (nodemon)
 
 
-var stream = fs.createReadStream('dict_big.txt');
+// Sorting strings 
+strings = [];
+var stream = fs.createReadStream('dict_small.txt');
 stream = byline.createStream(stream);
 
 stream
@@ -19,33 +18,21 @@ stream
         strings.push(line.toString());
     })
     .on('end', function() {
-        console.log(strings);
-        // sort.bubbleSort(strings);
-        // sort.bubbleSort2(strings);
-        // sort.bubbleSort3(strings);
-        // sort.selectionSort(strings);
-        sort.insertionSort(strings);
+        console.log('\nSorting strings...');
+        sort.bubbleSort(clone(strings));
+        sort.bubbleSort2(clone(strings));
+        sort.bubbleSort3(clone(strings));
+        sort.selectionSort(clone(strings));
+        sort.insertionSort(clone(strings));
     });
 
-// Experiments with very big arrays: 
+// Sorting numbers
+var numbers = random.randomNumbers(10001, 0, 99999);
 
-// for (var a=[], i=0; i<700; ++i) 
-//  a[i] = i;
+console.log('\nSorting numbers...');
 
-// // http://stackoverflow.com/questions/962802#962890
-// function shuffle(array) {
-    
-//  var tmp, current, top = array.length;
-    
-//  if(top) while(--top) {
-//      current = Math.floor(Math.random() * (top + 1));
-//      tmp = array[current];
-//      array[current] = array[top];
-//      array[top] = tmp;
-//  }
-//      return array;
-// }
-
-// siedemset = shuffle(a);
-// console.log(siedemset);
-// console.log(sort.insertionSort(siedemset));
+sort.bubbleSort(clone(numbers));
+sort.bubbleSort2(clone(numbers));
+sort.bubbleSort3(clone(numbers));
+sort.selectionSort(clone(numbers));
+sort.insertionSort(clone(numbers));

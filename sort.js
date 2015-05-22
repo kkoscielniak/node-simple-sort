@@ -27,7 +27,6 @@ exports.bubbleSort = function(arr) {
 			}
 		}
 	}
-
 	console.timeEnd('bubbleSort');
 };
 
@@ -112,3 +111,8 @@ exports.insertionSort = function(arr) {
 	}
 	console.timeEnd('insertionSort');
 };
+
+// @todo
+// - quicksort 3 rodzaje 
+// - quicksort + insertion sort
+// - shellsort dla dwóch metod wyznaczania h

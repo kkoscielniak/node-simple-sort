@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kkoscielniak/node-simple-sort#readme",
   "devDependencies": {
-    "byline": "^4.2.1"
+    "byline": "^4.2.1",
+    "clone": "^1.0.2"
   }
 }
